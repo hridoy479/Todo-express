@@ -1,12 +1,18 @@
 import express from "express"
 import dotenv from "dotenv"
 import prisma from "./db.js";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+// Absolute path to /public so it works on Vercel, not just locally
+const publicDir = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "public");
 
 
 const app = express();
 dotenv.config();
 app.use(express.json());
-app.use(express.static("public"))
+app.use(express.static(publicDir));
+app.get("/", (req, res) => res.sendFile(path.join(publicDir, "index.html")));
 const PORT = process.env.PORT || 3001;
 
 
