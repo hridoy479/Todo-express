@@ -176,6 +176,11 @@ app.delete('/todo/:id', async(req, res) => {
 
 
 
-app.listen(PORT,()=>{
-    console.log(`Server Started at http://localhost:${PORT}`);
-})
+// Vercel runs the exported app as a function; only listen when running locally
+if (!process.env.VERCEL) {
+    app.listen(PORT,()=>{
+        console.log(`Server Started at http://localhost:${PORT}`);
+    })
+}
+
+export default app;

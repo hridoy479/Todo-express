@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "postinstall": "prisma skills sync || exit 0"
+    "build": "prisma generate",
+    "postinstall": "prisma generate && (prisma skills sync || exit 0)"
   },
   "keywords": [],
   "type": "module",
